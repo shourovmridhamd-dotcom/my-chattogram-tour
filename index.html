@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chattogram Division Travel Tracker</title>
+
+    <!-- Open Graph / Facebook Meta Tags -->
+    <meta property="og:title" content="Chattogram Division Travel Map">
+    <meta property="og:description" content="Explore and mark tourist spots in Chattogram division!">
+    <meta property="og:image" content="https://shourovmridhamd-dotcom.github.io/my-chattogram-tour/preview.jpg">
+    <meta property="og:url" content="https://shourovmridhamd-dotcom.github.io/my-chattogram-tour/">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 10px;
+            text-align: center;
+            background-color: #f4f4f9;
+        }
+        h1 { color: #006652; }
+        #map {
+            height: 520px;
+            width: 100%;
+            max-width: 900px;
+            margin: 15px auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        .controls { margin: 20px 0; }
+        button {
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover { background-color: #115cbe; }
+    </style>
+</head>
+<body>
+
+    <h1>Chattogram Division Travel Map</h1>
+    <p>Bandarban, Rangamati, Khagrachhari, Cox's Bazar soho shob ghorar jaiga dekhun!</p>
+
+    <div id="map"></div>
+
+    <div class="controls">
+        <button onclick="shareOnFacebook()">Facebook-e Share Korun</button>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map').setView([22.1000, 92.1000], 7.5);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        const spots = [
+            { name: "Nilgiri (Bandarban)", lat: 21.9567, lng: 92.3411 },
+            { name: "Meghla Tourism (Bandarban)", lat: 22.1690, lng: 92.2150 },
+            { name: "Boga Lake (Bandarban)", lat: 21.9833, lng: 92.4167 },
+            { name: "Nilachal (Bandarban)", lat: 22.1764, lng: 92.2045 },
+            { name: "Keokradong (Bandarban)", lat: 21.9500, lng: 92.5167 },
+            { name: "Kaptai Lake (Rangamati)", lat: 22.4924, lng: 92.2231 },
+            { name: "Hanging Bridge (Rangamati)", lat: 22.6439, lng: 92.1833 },
+            { name: "Sajek Valley (Rangamati/Khagrachhari)", lat: 23.3822, lng: 92.2933 },
+            { name: "Alutila Cave (Khagrachhari)", lat: 23.0833, lng: 91.9667 },
+            { name: "Richhang Waterfall (Khagrachhari)", lat: 23.0900, lng: 91.9500 },
+            { name: "Cox's Bazar Sea Beach", lat: 21.4272, lng: 91.9702 },
+            { name: "Inani Beach (Cox's Bazar)", lat: 21.2333, lng: 92.0500 },
+            { name: "Saint Martin's Island", lat: 20.6272, lng: 92.3236 },
+            { name: "Patenga Sea Beach (Chattogram)", lat: 22.2322, lng: 91.7925 },
+            { name: "Foy's Lake (Chattogram)", lat: 22.3619, lng: 91.7908 }
+        ];
+
+        spots.forEach(spot => {
+            L.marker([spot.lat, spot.lng])
+                .addTo(map)
+                .bindPopup(`<b>${spot.name}</b>`);
+        });
+
+        function shareOnFacebook() {
+            const shareUrl = "https://shourovmridhamd-dotcom.github.io/my-chattogram-tour/";
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`, '_blank');
+        }
+    </script>
+</body>
+</html>
